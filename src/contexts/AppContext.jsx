@@ -6,16 +6,8 @@ let nextId = 100;
 const defaultTasks = [
   { id: 0, text: 'Chat with Elon Musk', isCompleted: true },
   { id: 1, text: 'Cut Onions', isCompleted: false },
-  { id: 2, text: 'Sing on the bath', isCompleted: true },
+  { id: 2, text: 'Review math', isCompleted: true },
   { id: 3, text: 'Do homework', isCompleted: false },
-  { id: 4, text: 'Do homework', isCompleted: false },
-  { id: 5, text: 'Do homework', isCompleted: false },
-  { id: 6, text: 'Do homework', isCompleted: false },
-  { id: 7, text: 'Do homework', isCompleted: false },
-  { id: 8, text: 'Do homework', isCompleted: false },
-  { id: 9, text: 'Do homework', isCompleted: false },
-  { id: 10, text: 'Do homework 10', isCompleted: false },
-  { id: 11, text: 'Do homework', isCompleted: false },
 ];
 
 export function AppContextProvider({ children }) {
