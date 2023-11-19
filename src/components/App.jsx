@@ -23,8 +23,8 @@ export function App() {
       </div>
 
       <TaskList>
-        {searchedTasks.map((task, i) => (
-          <Task key={i} task={task} />
+        {searchedTasks.map((task) => (
+          <Task key={task.id} task={task} />
         ))}
       </TaskList>
 
