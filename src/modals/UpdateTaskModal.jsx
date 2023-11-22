@@ -12,6 +12,7 @@ export default function UpdateTaskModal({ task, updateTask, setAppModal }) {
       <textarea
         className="w-full resize-none rounded p-1 text-black"
         placeholder="Do homework"
+        rows="4"
         value={textareaValue}
         onChange={(e) => {
           setTextareaValue(e.target.value);
