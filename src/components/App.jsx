@@ -17,7 +17,7 @@ const defaultTasks = [
 export default function App() {
   const [tasks, setTasks] = useState(defaultTasks);
   const [searchInputValue, setSearchInputValue] = useState('');
-  const [appHasModal, setAppHasModal] = useState(false);
+  const [appModal, setAppModal] = useState(null);
 
   const totalTasks = tasks.length;
   const completedTasks = tasks.reduce(
@@ -31,23 +31,21 @@ export default function App() {
       .includes(searchInputValue.toLocaleLowerCase());
   });
 
-  function toggleTaskIsCompleted(task) {
+  function deleteTask(taskId) {
+    setTasks(tasks.filter((curTask) => curTask.id !== taskId));
+  }
+
+  function createTask(taskBody) {
+    if (taskBody.text === '') return;
+    setTasks([...tasks, { id: nextId++, ...taskBody }]);
+  }
+
+  function updateTask(taskId, nextTaskBody) {
     setTasks(
       tasks.map((curTask) =>
-        curTask.id === task.id
-          ? { ...task, isCompleted: !task.isCompleted }
-          : curTask,
+        curTask.id === taskId ? { ...curTask, ...nextTaskBody } : curTask,
       ),
     );
-  }
-
-  function deleteTask(task) {
-    setTasks(tasks.filter((curTask) => curTask.id !== task.id));
-  }
-
-  function addTask(text) {
-    if (text === '') return;
-    setTasks([...tasks, { id: nextId++, text, isCompleted: false }]);
   }
 
   return (
@@ -68,7 +66,12 @@ export default function App() {
         />
         <Button
           onClick={() => {
-            setAppHasModal((appHasModal) => !appHasModal);
+            setAppModal(
+              <CreateTaskModal
+                createTask={createTask}
+                setAppModal={setAppModal}
+              />,
+            );
           }}
         >
           Create Task
@@ -80,17 +83,14 @@ export default function App() {
           <TaskListItem
             key={task.id}
             task={task}
-            toggleTaskIsCompleted={toggleTaskIsCompleted}
+            updateTask={updateTask}
             deleteTask={deleteTask}
+            setAppModal={setAppModal}
           />
         ))}
       </ul>
 
-      {appHasModal ? (
-        <Modal>
-          <CreateTaskModal addTask={addTask} setAppHasModal={setAppHasModal} />
-        </Modal>
-      ) : null}
+      {appModal !== null ? <Modal>{appModal}</Modal> : null}
     </div>
   );
 }
