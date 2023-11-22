@@ -1,11 +1,8 @@
 import { useState } from 'react';
 
-import Counter from './Counter';
-import SearchInput from './SearchInput';
-import Title from './Title';
-import TaskList from './TaskList';
+import Input from './Input';
 import TaskListItem from './TaskListItem';
-import CreateTaskButton from './CreateTaskButton';
+import Button from './Button';
 import Modal from '../modals/Modal';
 import CreateTaskModal from '../modals/CreateTaskModal';
 
@@ -55,19 +52,30 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-zinc-800 p-2">
-      <Title>Task List</Title>
+      <h1 className="py-2 text-center text-5xl font-bold text-blue-400">
+        Task List
+      </h1>
 
-      <Counter completedTasks={completedTasks} totalTasks={totalTasks} />
+      <p className="text-center text-2xl text-white">
+        {completedTasks} of {totalTasks} completed
+      </p>
 
       <div className="mx-auto flex max-w-2xl items-center justify-between py-2">
-        <SearchInput
-          searchInputValue={searchInputValue}
-          setSearchInputValue={setSearchInputValue}
+        <Input
+          placeholder={'Search Task'}
+          inputValue={searchInputValue}
+          setInputValue={setSearchInputValue}
         />
-        <CreateTaskButton setAppHasModal={setAppHasModal} />
+        <Button
+          onClick={() => {
+            setAppHasModal((appHasModal) => !appHasModal);
+          }}
+        >
+          Create Task
+        </Button>
       </div>
 
-      <TaskList>
+      <ul className="flex flex-col gap-2 pt-2">
         {searchedTasks.map((task) => (
           <TaskListItem
             key={task.id}
@@ -76,10 +84,10 @@ export default function App() {
             deleteTask={deleteTask}
           />
         ))}
-      </TaskList>
+      </ul>
 
       {appHasModal ? (
-        <Modal setAppHasModal={setAppHasModal}>
+        <Modal>
           <CreateTaskModal addTask={addTask} setAppHasModal={setAppHasModal} />
         </Modal>
       ) : null}
