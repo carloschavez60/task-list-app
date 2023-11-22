@@ -1,16 +1,10 @@
-import { useContext } from 'react';
-
-import { AppContext } from './../contexts/AppContext';
-
-export function SearchInput() {
-  const { searchInputValue, setSearchInputValue } = useContext(AppContext);
-
+export default function SearchInput({ searchInputValue, setSearchInputValue }) {
   return (
     <input
       type="text"
       placeholder="Search Task"
-      className="rounded border p-1"
       value={searchInputValue}
+      className="w-48 rounded border p-1"
       onChange={(e) => {
         setSearchInputValue(e.target.value);
       }}

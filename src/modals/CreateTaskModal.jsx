@@ -1,10 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+
 import { IconX } from '@tabler/icons-react';
 
-import { AppContext } from '../contexts/AppContext';
-
-export function CreateTaskModal() {
-  const { addTask, setAppHasModal } = useContext(AppContext);
+export default function CreateTaskModal({ addTask, setAppHasModal }) {
   const [textareaValue, setTextareaValue] = useState('');
 
   return (
@@ -28,7 +26,7 @@ export function CreateTaskModal() {
         Done
       </button>
       <div
-        className="absolute right-0 top-0 p-2"
+        className="absolute right-0 top-0 cursor-pointer p-2"
         onClick={() => {
           setAppHasModal(false);
         }}
