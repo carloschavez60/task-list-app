@@ -1,4 +1,14 @@
-export default function Input({ placeholder, inputValue, setInputValue }) {
+import React from 'react';
+
+export default function Input({
+  placeholder,
+  inputValue,
+  setInputValue,
+}: {
+  placeholder: string;
+  inputValue: string;
+  setInputValue: (inputValue: string) => void;
+}) {
   return (
     <input
       type="text"

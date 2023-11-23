@@ -3,7 +3,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { IconSquareCheck } from '@tabler/icons-react';
 import { IconEdit } from '@tabler/icons-react';
 
-import UpdateTaskModal from '../modals/UpdateTaskModal';
+import TaskModal from '../modals/TaskModal';
 
 export default function TaskLIstItem({
   task,
@@ -36,11 +36,13 @@ export default function TaskLIstItem({
           className="cursor-pointer p-2"
           onClick={() => {
             setAppModal(
-              <UpdateTaskModal
+              <TaskModal
                 task={task}
                 updateTask={updateTask}
                 setAppModal={setAppModal}
-              />,
+              >
+                Edit your task
+              </TaskModal>,
             );
           }}
         >

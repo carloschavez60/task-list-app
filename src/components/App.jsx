@@ -4,7 +4,7 @@ import Input from './Input';
 import TaskListItem from './TaskListItem';
 import Button from './Button';
 import Modal from '../modals/Modal';
-import CreateTaskModal from '../modals/CreateTaskModal';
+import TaskModal from '../modals/TaskModal';
 
 let nextId = 100;
 const defaultTasks = [
@@ -67,10 +67,9 @@ export default function App() {
         <Button
           onClick={() => {
             setAppModal(
-              <CreateTaskModal
-                createTask={createTask}
-                setAppModal={setAppModal}
-              />,
+              <TaskModal setAppModal={setAppModal} createTask={createTask}>
+                Write your new task
+              </TaskModal>,
             );
           }}
         >
