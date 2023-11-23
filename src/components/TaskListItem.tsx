@@ -4,12 +4,18 @@ import { IconSquareCheck } from '@tabler/icons-react';
 import { IconEdit } from '@tabler/icons-react';
 
 import TaskModal from '../modals/TaskModal';
+import type { Task } from './App';
 
 export default function TaskLIstItem({
   task,
   updateTask,
   deleteTask,
   setAppModal,
+}: {
+  task: Task;
+  updateTask: (taskId: number, nextTaskBody: Partial<Omit<Task, 'id'>>) => void;
+  deleteTask: (taskId: number) => void;
+  setAppModal: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
 }) {
   return (
     <li className="mx-auto flex min-h-full w-full max-w-2xl items-center justify-between gap-1 rounded bg-zinc-700">

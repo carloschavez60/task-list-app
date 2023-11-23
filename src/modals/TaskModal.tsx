@@ -1,23 +1,32 @@
 import { useState } from 'react';
-
 import { IconX } from '@tabler/icons-react';
+
 import Button from '../components/Button';
+import type { Task } from '../components/App';
 
 export default function TaskModal({
   setAppModal,
   children,
-  createTask = null,
-  updateTask = null,
-  task = null,
+  createTask,
+  updateTask,
+  task,
+}: {
+  setAppModal: React.Dispatch<React.SetStateAction<React.JSX.Element | null>>;
+  children: React.ReactNode;
+  createTask?: (taskBody: Omit<Task, 'id'>) => void;
+  updateTask?: (
+    taskId: number,
+    nextTaskBody: Partial<Omit<Task, 'id'>>,
+  ) => void;
+  task?: Task;
 }) {
   const [textareaValue, setTextareaValue] = useState(task?.text ?? '');
 
   function onClick() {
-    console.log(task, createTask, updateTask);
     setAppModal(null);
-    if (createTask !== null) {
+    if (createTask !== undefined) {
       createTask({ text: textareaValue, isCompleted: false });
-    } else if (updateTask !== null && task !== null) {
+    } else if (updateTask !== undefined && task !== undefined) {
       if (task.text === textareaValue) return;
       updateTask(task.id, { text: textareaValue });
     }
@@ -29,7 +38,7 @@ export default function TaskModal({
       <textarea
         className="w-full resize-none rounded p-1 text-black"
         placeholder="Do homework"
-        rows="4"
+        rows={4}
         value={textareaValue}
         onChange={(e) => {
           setTextareaValue(e.target.value);

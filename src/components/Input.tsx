@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Input({
   placeholder,
   inputValue,
@@ -7,7 +5,7 @@ export default function Input({
 }: {
   placeholder: string;
   inputValue: string;
-  setInputValue: (inputValue: string) => void;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <input

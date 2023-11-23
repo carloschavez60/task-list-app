@@ -6,8 +6,14 @@ import Button from './Button';
 import Modal from '../modals/Modal';
 import TaskModal from '../modals/TaskModal';
 
+export interface Task {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+}
+
 let nextId = 100;
-const defaultTasks = [
+const defaultTasks: Task[] = [
   { id: 0, text: 'Chat with Elon Musk', isCompleted: true },
   { id: 1, text: 'Cut Onions', isCompleted: false },
   { id: 2, text: 'Review math', isCompleted: true },
@@ -17,7 +23,7 @@ const defaultTasks = [
 export default function App() {
   const [tasks, setTasks] = useState(defaultTasks);
   const [searchInputValue, setSearchInputValue] = useState('');
-  const [appModal, setAppModal] = useState(null);
+  const [appModal, setAppModal] = useState<React.JSX.Element | null>(null);
 
   const totalTasks = tasks.length;
   const completedTasks = tasks.reduce(
@@ -31,16 +37,16 @@ export default function App() {
       .includes(searchInputValue.toLocaleLowerCase());
   });
 
-  function deleteTask(taskId) {
+  function deleteTask(taskId: number) {
     setTasks(tasks.filter((curTask) => curTask.id !== taskId));
   }
 
-  function createTask(taskBody) {
+  function createTask(taskBody: Omit<Task, 'id'>) {
     if (taskBody.text === '') return;
     setTasks([...tasks, { id: nextId++, ...taskBody }]);
   }
 
-  function updateTask(taskId, nextTaskBody) {
+  function updateTask(taskId: number, nextTaskBody: Partial<Omit<Task, 'id'>>) {
     setTasks(
       tasks.map((curTask) =>
         curTask.id === taskId ? { ...curTask, ...nextTaskBody } : curTask,
