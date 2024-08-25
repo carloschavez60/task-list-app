@@ -1,16 +1,13 @@
-export default function Button({
-  onClick,
-  children,
-}: {
+export function Button(props: {
+  text: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  children: React.ReactNode;
 }) {
   return (
     <button
-      className="rounded bg-blue-400 px-4 py-2 text-white"
-      onClick={onClick}
+      className="rounded-md bg-blue-400 px-4 py-2 text-white"
+      onClick={props.onClick}
     >
-      {children}
+      {props.text}
     </button>
   );
 }
